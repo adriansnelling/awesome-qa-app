@@ -15,7 +15,6 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#ideas">Ideas for extension</a></li>
   </ol>
 </details>
 
