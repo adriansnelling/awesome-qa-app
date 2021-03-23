@@ -1,13 +1,13 @@
-import {allQuestionActionType} from "../actiontypes/question";
+import { allQuestionActionType } from "../actiontypes/question";
 
 const initialState = {
     allQuestionWithAnswer: [],
     questionEditId: null,
 };
 
-function globalReducer(state = initialState, action): StateType {
+function globalReducer(state = initialState, action) {
     if (action.type === allQuestionActionType.CREATE_QUESTION_WITH_ANSWER) {
-        const {question, id, answer} = action.payload;
+        const { question, id, answer } = action.payload;
 
         return {
             ...state,
@@ -21,8 +21,7 @@ function globalReducer(state = initialState, action): StateType {
         return {
             ...state,
             allQuestionWithAnswer: state.allQuestionWithAnswer.filter(
-                (questionWithAnswer) =>
-                    questionWithAnswer.id !== action.payload.questionId
+                (questionWithAnswer) => questionWithAnswer.id !== action.payload.questionId
             ),
         };
     } else if (action.type === allQuestionActionType.DELETE_QUESTION_LIST) {
@@ -47,32 +46,26 @@ function globalReducer(state = initialState, action): StateType {
                 }
             ),
         };
-    } else if (
-        action.type === allQuestionActionType.UPDATE_QUESTION_WITH_ANSWER
-    ) {
-        const {answer, id, question} = action.payload;
+    } else if (action.type === allQuestionActionType.UPDATE_QUESTION_WITH_ANSWER) {
+        const { answer, id, question } = action.payload;
 
         return {
             ...state,
-            allQuestionWithAnswer: state.allQuestionWithAnswer.map(
-                (questionWithAnswer) => {
-                    if (questionWithAnswer.id === action.payload.id) {
-                        return {
-                            answer,
-                            id,
-                            question,
-                        };
-                    } else {
-                        return questionWithAnswer;
-                    }
+            allQuestionWithAnswer: state.allQuestionWithAnswer.map((questionWithAnswer) => {
+                if (questionWithAnswer.id === action.payload.id) {
+                    return {
+                        answer,
+                        id,
+                        question,
+                    };
+                } else {
+                    return questionWithAnswer;
                 }
-            ),
+            }),
             questionEditId: null,
         };
-    } else if (
-        action.type === allQuestionActionType.EDIT_QUESTION_WITH_ANSWER
-    ) {
-        const {questionEditId} = action.payload;
+    } else if (action.type === allQuestionActionType.EDIT_QUESTION_WITH_ANSWER) {
+        const { questionEditId } = action.payload;
 
         return {
             ...state,
@@ -88,4 +81,4 @@ function globalReducer(state = initialState, action): StateType {
     return state;
 }
 
-export {globalReducer};
+export { globalReducer };

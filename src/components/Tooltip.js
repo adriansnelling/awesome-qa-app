@@ -54,7 +54,7 @@ const TooltipCard = styled.div`
     }
 `;
 
-export const Tooltip = ({children, text}) => {
+export const Tooltip = ({ children, text }) => {
     return (
         <TooltipCard>
             <TooltipText>{children}</TooltipText>

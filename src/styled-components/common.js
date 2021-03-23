@@ -1,5 +1,4 @@
-import styled, {keyframes} from "styled-components";
-import {createGlobalStyle} from "styled-components";
+import styled, { keyframes, createGlobalStyle } from "styled-components";
 
 const AllGlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css?family=Notable');
@@ -51,10 +50,11 @@ const rotate360 = keyframes`
   }
 `;
 
-const Spinner = styled.div`
+const LoadingSpinner = styled.div`
     animation: ${rotate360} 1s linear infinite;
     transform: translateZ(0);
 
+    margin-bottom: 1rem;
     border-top: 2px solid grey;
     border-right: 2px solid grey;
     border-bottom: 2px solid grey;
@@ -65,11 +65,39 @@ const Spinner = styled.div`
     border-radius: 50%;
 `;
 
+const Input = styled.input`
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+`;
+
+const TextArea = styled.textarea`
+    height: 3rem;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+`;
+
+const Label = styled.label`
+    margin-bottom: 1rem;
+`;
+
+const Checkbox = styled.input``;
+
+const InputRow = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+`;
+
 export {
     AllGlobalStyle,
     ButtonCreate,
     ButtonSort,
     ButtonDelete,
+    Checkbox,
     Container,
-    Spinner,
+    Label,
+    LoadingSpinner,
+    Input,
+    InputRow,
+    TextArea,
 };

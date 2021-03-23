@@ -1,13 +1,13 @@
-import {Provider} from "react-redux";
-import {createStore, compose} from "redux";
+import { Provider } from "react-redux";
+import { createStore, compose } from "redux";
 import styled from "styled-components";
 
 import "./App.css";
-import {QuestionDetail} from "./components/QuestionDetail";
-import {QuestionCreatedList} from "./components/QuestionCreatedList";
-import {SideBar} from "./components/SideBar";
-import {globalReducer} from "./reducers/global";
-import {AllGlobalStyle} from "./styled-components/common";
+import { QuestionDetail } from "./components/QuestionDetail";
+import { QuestionCreatedList } from "./components/QuestionCreatedList";
+import { SideBar } from "./components/SideBar";
+import { globalReducer } from "./reducers/global";
+import { AllGlobalStyle } from "./styled-components/common";
 
 const AppContainer = styled.div`
     display: flex;
@@ -15,6 +15,10 @@ const AppContainer = styled.div`
     @media (max-width: 768px) {
         flex-direction: column !important;
     }
+`;
+
+const ViewContainer = styled.div`
+    height: calc(100vh - 2rem); ;
 `;
 
 const Header = styled.h1`
@@ -33,14 +37,16 @@ const QuestionContent = styled.div`
     }
 `;
 
-const preloadedState = {allQuestionWithAnswer: []};
+const preloadedState = { allQuestionWithAnswer: [] };
 const allEnhancer = [];
 
+/* eslint-disable no-underscore-dangle */
 if (typeof window.__REDUX_DEVTOOLS_EXTENSION__ === "function") {
     allEnhancer.push(window.__REDUX_DEVTOOLS_EXTENSION__());
 } else {
     // Redux DevTools is unavailable.
 }
+/* eslint-enable no-underscore-dangle */
 
 const rootEnhancer = compose(...allEnhancer);
 const appStore = createStore(globalReducer, preloadedState, rootEnhancer);
@@ -49,14 +55,16 @@ function App() {
     return (
         <Provider store={appStore}>
             <AllGlobalStyle />
-            <Header>The awesome Q/A tool</Header>
-            <AppContainer>
-                <SideBar />
-                <QuestionContent>
-                    <QuestionCreatedList />
-                    <QuestionDetail />
-                </QuestionContent>
-            </AppContainer>
+            <ViewContainer>
+                <Header>The awesome Q/A tool</Header>
+                <AppContainer>
+                    <SideBar />
+                    <QuestionContent>
+                        <QuestionCreatedList />
+                        <QuestionDetail />
+                    </QuestionContent>
+                </AppContainer>
+            </ViewContainer>
         </Provider>
     );
 }

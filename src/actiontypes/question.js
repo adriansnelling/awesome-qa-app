@@ -8,4 +8,4 @@ const allQuestionActionType = {
     CANCEL_QUESTION_EDIT: "CANCEL_QUESTION_EDIT",
 };
 
-export {allQuestionActionType};
+export { allQuestionActionType };

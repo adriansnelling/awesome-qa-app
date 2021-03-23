@@ -1,15 +1,10 @@
-import React, {Fragment, useState} from "react";
-import {useDispatch} from "react-redux";
-import styled, {css} from "styled-components";
-import {
-    deleteQuestionWithAnswerById,
-    editQuestionWithAnswer,
-} from "../actions/question";
-import {ButtonDelete, ButtonSort} from "../styled-components/common";
+import React, { Fragment, useState } from "react";
+import { useDispatch } from "react-redux";
+import styled, { css } from "styled-components";
+import { deleteQuestionWithAnswerById, editQuestionWithAnswer } from "../actions/question";
+import { ButtonDelete, ButtonSort } from "../styled-components/common";
 
-const determineContainerBorderRadius = (props) => {
-    const {isStart, isEnd} = props;
-    debugger;
+const determineContainerBorderRadius = ({ isStart, isEnd }) => {
     if (isStart && isEnd) {
         return css`
             border-radius: 4px;
@@ -47,7 +42,7 @@ const QuestionOption = styled.div`
 const Answer = styled.div``;
 const QuestionText = styled.p``;
 
-export const QuestionWithAnswer = ({answer, id, isStart, isEnd, question}) => {
+export const QuestionWithAnswer = ({ answer, id, isStart, isEnd, question }) => {
     const [isAnswerShown, setIsAnswerShown] = useState(false);
     const dispatch = useDispatch();
 
@@ -68,12 +63,8 @@ export const QuestionWithAnswer = ({answer, id, isStart, isEnd, question}) => {
             <Question onClick={toggleAnswerVisibility}>
                 <QuestionText>{question}</QuestionText>
                 <QuestionOption>
-                    <ButtonSort onClick={handleButtonEditClick}>
-                        Edit
-                    </ButtonSort>
-                    <ButtonDelete onClick={handleButtonDeleteClick}>
-                        Delete
-                    </ButtonDelete>
+                    <ButtonSort onClick={handleButtonEditClick}>Edit</ButtonSort>
+                    <ButtonDelete onClick={handleButtonDeleteClick}>Delete</ButtonDelete>
                 </QuestionOption>
             </Question>
         );

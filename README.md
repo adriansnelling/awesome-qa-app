@@ -30,8 +30,6 @@ Simple question and answer app, demonstrating React and Redux.
 -   [Redux](https://redux.js.org/)
 -   [styled-components](https://styled-components.com/)
 
-<!-- GETTING STARTED -->
-
 ## Getting Started
 
 To get a local copy up and running follow these simple example steps.
@@ -56,7 +54,12 @@ This is an example of how to list things you need to use the software and how to
     ```sh
     npm start
     ```
-4. To run
-    ```sh
-    npm test
-    ```
+
+### Ideas for extension
+
+<li><a href="#ideas">Ideas for extension</a></li>
+<ul>
+    <li>Proper input validation, hover styling</li>
+    <li>Refactor of existing code, styled components</li>
+    <li>Unit tests</li>
+</ul>

@@ -1,9 +1,9 @@
-import {allQuestionActionType} from "../actiontypes/question";
+import { allQuestionActionType } from "../actiontypes/question";
 
 function createQuestionWithAnswer(answer, id, question) {
     return {
         type: allQuestionActionType.CREATE_QUESTION_WITH_ANSWER,
-        payload: {answer, id, question},
+        payload: { answer, id, question },
     };
 }
 
@@ -16,7 +16,7 @@ function deleteQuestionList() {
 function deleteQuestionWithAnswerById(questionId) {
     return {
         type: allQuestionActionType.DELETE_QUESTION_BY_ID,
-        payload: {questionId},
+        payload: { questionId },
     };
 }
 
@@ -29,14 +29,14 @@ function sortQuestionList() {
 function editQuestionWithAnswer(questionEditId) {
     return {
         type: allQuestionActionType.EDIT_QUESTION_WITH_ANSWER,
-        payload: {questionEditId},
+        payload: { questionEditId },
     };
 }
 
 function updateQuestionWithAnswer(answer, id, question) {
     return {
         type: allQuestionActionType.UPDATE_QUESTION_WITH_ANSWER,
-        payload: {answer, id, question},
+        payload: { answer, id, question },
     };
 }
 

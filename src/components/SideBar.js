@@ -1,5 +1,5 @@
 import React from "react";
-import {shallowEqual, useSelector} from "react-redux";
+import { shallowEqual, useSelector } from "react-redux";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -18,10 +18,7 @@ const selectQuestionWithAnswerList = () => (state) => ({
 });
 
 export const SideBar = () => {
-    const {allQuestionWithAnswer} = useSelector(
-        selectQuestionWithAnswerList(),
-        shallowEqual
-    );
+    const { allQuestionWithAnswer } = useSelector(selectQuestionWithAnswerList(), shallowEqual);
 
     const determineQuestionCount = () => {
         if (allQuestionWithAnswer.length > 0) {
