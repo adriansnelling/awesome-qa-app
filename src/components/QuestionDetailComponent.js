@@ -65,7 +65,7 @@ export const QuestionDetailComponent = ({ actionSuccess, questionWithAnswerEdit,
 
     const dispatchSuccessFunction = () => {
         if (id) {
-            dispatch(actionSuccess(questionWithAnswer));
+            dispatch(actionSuccess(answer, id, question));
         } else {
             dispatch(actionSuccess(answer, `${question}_${new Date().getTime()}`, question));
         }
