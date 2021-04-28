@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { shallowEqual, useSelector } from "react-redux";
 
-import { createQuestionWithAnswer, updateQuestionWithAnswer } from "../actions/question";
-import { QuestionDetailComponent } from "./QuestionDetailComponent";
+import { createQuestionWithAnswer, updateQuestionWithAnswer, setIsLoading } from "../actions/question";
+import { LoadingSpinner } from "../styled-components/common";
+import QuestionDetailAdd from "./QuestionDetailAdd";
+import QuestionDetailEdit from "./QuestionDetailEdit";
 
 const selectQuestionDetail = () => (state) => ({
     allQuestionWithAnswer: state.allQuestionWithAnswer,
     questionEditId: state.questionEditId,
+    isLoading: state.isLoading,
 });
 
-export const QuestionDetail = () => {
-    const { allQuestionWithAnswer, questionEditId } = useSelector(selectQuestionDetail(), shallowEqual);
+const QuestionDetail = () => {
+    const { allQuestionWithAnswer, questionEditId, isLoading } = useSelector(selectQuestionDetail(), shallowEqual);
     const [questionWithAnswer, setQuestionWithAnswer] = useState(null);
 
     useEffect(() => {
@@ -18,31 +21,24 @@ export const QuestionDetail = () => {
             (questionAnswer) => questionAnswer.id === questionEditId
         );
 
-        if (questionWithAnswerEdit) {
-            setQuestionWithAnswer(questionWithAnswerEdit);
-        } else {
-            // No Question with Answer edit.
-        }
+        setQuestionWithAnswer(questionWithAnswerEdit);
 
         return () => {};
     }, [allQuestionWithAnswer, questionEditId]);
 
-    if (questionWithAnswer) {
+    if (isLoading) {
+        return <LoadingSpinner />;
+    } else if (questionWithAnswer) {
         return (
-            <QuestionDetailComponent
-                actionSuccess={updateQuestionWithAnswer}
-                questionWithAnswerEdit={questionWithAnswer}
-                textSuccess="Update Question"
-                textTooltip="Here you can update your question and answer."
+            <QuestionDetailEdit
+                questionWithAnswer={questionWithAnswer}
+                setIsLoading={setIsLoading}
+                updateQuestionWithAnswer={updateQuestionWithAnswer}
             />
         );
     } else {
-        return (
-            <QuestionDetailComponent
-                actionSuccess={createQuestionWithAnswer}
-                textSuccess="Create Question"
-                textTooltip="Here you can add a new question and answer."
-            />
-        );
+        return <QuestionDetailAdd createQuestionWithAnswer={createQuestionWithAnswer} setIsLoading={setIsLoading} />;
     }
 };
+
+export default QuestionDetail;

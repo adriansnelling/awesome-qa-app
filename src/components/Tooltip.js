@@ -54,13 +54,13 @@ const TooltipCard = styled.div`
     }
 `;
 
-export const Tooltip = ({ children, text }) => {
-    return (
-        <TooltipCard>
-            <TooltipText>{children}</TooltipText>
-            <TooltipBox>
-                <p>{text}</p>
-            </TooltipBox>
-        </TooltipCard>
-    );
-};
+const Tooltip = ({ children, text }) => (
+    <TooltipCard>
+        <TooltipText>{children}</TooltipText>
+        <TooltipBox>
+            <p>{text}</p>
+        </TooltipBox>
+    </TooltipCard>
+);
+
+export default Tooltip;

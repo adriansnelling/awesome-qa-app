@@ -24,25 +24,36 @@ const determineContainerBorderRadius = ({ isStart, isEnd }) => {
         `;
     }
 };
+
 const Container = styled.div`
     border: 1px solid black;
     ${determineContainerBorderRadius};
     padding: 0.5rem;
 `;
+
 const Question = styled.div`
     display: flex;
     justify-content: space-between;
     font-weight: bold;
 `;
+
 const QuestionOption = styled.div`
     display: flex;
     justify-content: flex-end;
     width: 10rem;
 `;
-const Answer = styled.div``;
-const QuestionText = styled.p``;
 
-export const QuestionWithAnswer = ({ answer, id, isStart, isEnd, question }) => {
+const Answer = styled.div``;
+
+const QuestionText = styled.p`
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+`;
+
+const QuestionEditText = styled.p``;
+
+const QuestionWithAnswer = ({ answer, id, isStart, isEnd, isEditing, question }) => {
     const [isAnswerShown, setIsAnswerShown] = useState(false);
     const dispatch = useDispatch();
 
@@ -58,17 +69,21 @@ export const QuestionWithAnswer = ({ answer, id, isStart, isEnd, question }) => 
         dispatch(editQuestionWithAnswer(id));
     };
 
-    const QuestionToggleAnswer = () => {
-        return (
-            <Question onClick={toggleAnswerVisibility}>
-                <QuestionText>{question}</QuestionText>
-                <QuestionOption>
-                    <ButtonSort onClick={handleButtonEditClick}>Edit</ButtonSort>
-                    <ButtonDelete onClick={handleButtonDeleteClick}>Delete</ButtonDelete>
-                </QuestionOption>
-            </Question>
-        );
-    };
+    const QuestionToggleAnswer = () => (
+        <Question>
+            <QuestionText onClick={toggleAnswerVisibility}>{question}</QuestionText>
+            {isEditing ? (
+                <QuestionEditText>*Editing*</QuestionEditText>
+            ) : (
+                <Fragment>
+                    <QuestionOption>
+                        <ButtonSort onClick={handleButtonEditClick}>Edit</ButtonSort>
+                        <ButtonDelete onClick={handleButtonDeleteClick}>Delete</ButtonDelete>
+                    </QuestionOption>
+                </Fragment>
+            )}
+        </Question>
+    );
 
     const QuestionAndAnswerIfNeeded = () => {
         if (isAnswerShown) {
@@ -89,3 +104,5 @@ export const QuestionWithAnswer = ({ answer, id, isStart, isEnd, question }) => 
         </Container>
     );
 };
+
+export default QuestionWithAnswer;

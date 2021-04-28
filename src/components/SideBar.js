@@ -3,6 +3,7 @@ import { shallowEqual, useSelector } from "react-redux";
 import styled from "styled-components";
 
 const Container = styled.div`
+    min-height: 80vh;
     padding: 1rem;
     border-right: 2px solid black;
 
@@ -35,3 +36,5 @@ export const SideBar = () => {
         </Container>
     );
 };
+
+export default SideBar;

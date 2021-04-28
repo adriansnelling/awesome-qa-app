@@ -1,24 +1,55 @@
-import React from "react";
+import React, { useCallback } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { ButtonDelete, ButtonSort } from "../styled-components/common";
 
-import { QuestionWithAnswer } from "./QuestionWithAnswer";
+import QuestionWithAnswer from "./QuestionWithAnswer";
 
-const QuestionEmpty = styled.div`
-    border-radius: 4px;
-    padding: 20px;
-    background-color: #f44336;
-    color: white;
-    margin-bottom: 15px;
+const QuestionContainer = styled.div`
+    margin-bottom: 1rem;
 `;
 
-export const QuestionList = ({ allQuestionWithAnswer }) => {
-    if (allQuestionWithAnswer?.length > 0) {
-        const { length } = allQuestionWithAnswer;
+const ListContainer = styled.div`
+    width: 100%;
+`;
 
-        return allQuestionWithAnswer.map((props, index) => {
-            return <QuestionWithAnswer isStart={index === 0} isEnd={index === length - 1} key={props.id} {...props} />;
-        });
-    } else {
-        return <QuestionEmpty>No Questions yet :(</QuestionEmpty>;
-    }
+const OptionContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+`;
+
+const QuestionList = ({ allQuestionWithAnswer, questionEditId, deleteQuestionList, sortQuestionList }) => {
+    const dispatch = useDispatch();
+    const listLength = allQuestionWithAnswer?.length ?? 0;
+
+    const handleButtonDeleteClicked = useCallback(() => {
+        dispatch(deleteQuestionList());
+    });
+
+    const handleButtonSortClicked = useCallback(() => {
+        dispatch(sortQuestionList());
+    });
+
+    return (
+        <ListContainer>
+            <QuestionContainer>
+                {allQuestionWithAnswer.map((props, index) => (
+                    <QuestionWithAnswer
+                        isStart={index === 0}
+                        isEnd={index === listLength - 1}
+                        isEditing={questionEditId === props.id}
+                        key={props.id}
+                        {...props}
+                    />
+                ))}
+            </QuestionContainer>
+            <OptionContainer>
+                <ButtonSort onClick={handleButtonSortClicked}>Sort Questions</ButtonSort>
+                <ButtonDelete onClick={handleButtonDeleteClicked}>Delete all questions</ButtonDelete>
+            </OptionContainer>
+        </ListContainer>
+    );
 };
+
+export default QuestionList;

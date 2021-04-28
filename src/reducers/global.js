@@ -1,19 +1,20 @@
-import { allQuestionActionType } from "../actiontypes/question";
+import allQuestionActionType from "../actiontypes/question";
 
 const initialState = {
     allQuestionWithAnswer: [],
     questionEditId: null,
+    isLoading: false,
 };
 
 function globalReducer(state = initialState, action) {
     if (action.type === allQuestionActionType.CREATE_QUESTION_WITH_ANSWER) {
-        const { question, id, answer } = action.payload;
+        const { question, answer } = action.payload;
 
         return {
             ...state,
             allQuestionWithAnswer: state.allQuestionWithAnswer.concat({
                 answer,
-                id,
+                id: `${question}_${new Date().getTime()}`,
                 question,
             }),
         };
@@ -26,6 +27,7 @@ function globalReducer(state = initialState, action) {
         };
     } else if (action.type === allQuestionActionType.DELETE_QUESTION_LIST) {
         return {
+            ...state,
             allQuestionWithAnswer: [],
         };
     } else if (action.type === allQuestionActionType.SORT_QUESTION_LIST) {
@@ -76,9 +78,16 @@ function globalReducer(state = initialState, action) {
             ...state,
             questionEditId: null,
         };
+    } else if (action.type === allQuestionActionType.SET_LOADING) {
+        const { isLoading } = action.payload;
+
+        return {
+            ...state,
+            isLoading,
+        };
     }
 
     return state;
 }
 
-export { globalReducer };
+export default globalReducer;
