@@ -54,7 +54,7 @@ const QuestionDetailEdit = ({ updateQuestionWithAnswer, questionWithAnswer, setI
                 alert("Please provide a question and answer.");
             }
         },
-        [answer, question]
+        [questionWithAnswerEdit]
     );
 
     const handleButtonCancelClick = useCallback(() => {
