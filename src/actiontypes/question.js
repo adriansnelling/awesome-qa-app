@@ -6,6 +6,7 @@ const allQuestionActionType = {
     EDIT_QUESTION_WITH_ANSWER: "EDIT_QUESTION_WITH_ANSWER",
     UPDATE_QUESTION_WITH_ANSWER: "UPDATE_QUESTION_WITH_ANSWER",
     CANCEL_QUESTION_EDIT: "CANCEL_QUESTION_EDIT",
+    SET_LOADING: "SET_LOADING",
 };
 
-export { allQuestionActionType };
+export default allQuestionActionType;

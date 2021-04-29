@@ -1,9 +1,9 @@
-import { allQuestionActionType } from "../actiontypes/question";
+import allQuestionActionType from "../actiontypes/question";
 
-function createQuestionWithAnswer(answer, id, question) {
+function createQuestionWithAnswer(answer, question, hasDelay) {
     return {
         type: allQuestionActionType.CREATE_QUESTION_WITH_ANSWER,
-        payload: { answer, id, question },
+        payload: { answer, question, hasDelay },
     };
 }
 
@@ -33,16 +33,23 @@ function editQuestionWithAnswer(questionEditId) {
     };
 }
 
-function updateQuestionWithAnswer(answer, id, question) {
+function updateQuestionWithAnswer(answer, id, question, hasDelay) {
     return {
         type: allQuestionActionType.UPDATE_QUESTION_WITH_ANSWER,
-        payload: { answer, id, question },
+        payload: { answer, id, question, hasDelay },
     };
 }
 
 function cancelQuestionEdit() {
     return {
         type: allQuestionActionType.CANCEL_QUESTION_EDIT,
+    };
+}
+
+function setIsLoading(isLoading) {
+    return {
+        type: allQuestionActionType.SET_LOADING,
+        payload: { isLoading },
     };
 }
 
@@ -54,4 +61,5 @@ export {
     editQuestionWithAnswer,
     updateQuestionWithAnswer,
     cancelQuestionEdit,
+    setIsLoading,
 };
