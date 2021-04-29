@@ -54,12 +54,12 @@ const QuestionDetailEdit = ({ updateQuestionWithAnswer, questionWithAnswer, setI
                 alert("Please provide a question and answer.");
             }
         },
-        [questionWithAnswerEdit]
+        [answer, dispatch, id, question, setIsLoading, updateQuestionWithAnswer]
     );
 
     const handleButtonCancelClick = useCallback(() => {
         dispatch(cancelQuestionEdit());
-    });
+    }, [dispatch]);
 
     return (
         <Container>

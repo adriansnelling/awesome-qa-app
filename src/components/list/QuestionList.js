@@ -25,11 +25,11 @@ const QuestionList = ({ allQuestionWithAnswer, questionEditId, deleteQuestionLis
 
     const handleButtonDeleteClicked = useCallback(() => {
         dispatch(deleteQuestionList());
-    });
+    }, [dispatch, deleteQuestionList]);
 
     const handleButtonSortClicked = useCallback(() => {
         dispatch(sortQuestionList());
-    });
+    }, [dispatch, sortQuestionList]);
 
     return (
         <ListContainer>

@@ -53,12 +53,12 @@ const QuestionDetailAdd = ({ createQuestionWithAnswer, setIsLoading }) => {
                 alert("Please provide a question and answer.");
             }
         },
-        [questionWithAnswer]
+        [answer, createQuestionWithAnswer, dispatch, question, setIsLoading]
     );
 
     const handleButtonCancelClick = useCallback(() => {
         setQuestionWithAnswer(initialState);
-    });
+    }, []);
 
     return (
         <Container>
