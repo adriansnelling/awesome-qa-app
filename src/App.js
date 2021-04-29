@@ -4,9 +4,9 @@ import { createStore, compose } from "redux";
 import styled from "styled-components";
 
 import "./App.css";
-import QuestionDetail from "./components/QuestionDetail";
-import QuestionCreatedList from "./components/QuestionCreatedList";
-import { SideBar } from "./components/SideBar";
+import QuestionDetail from "./components/detail/QuestionDetail";
+import QuestionCreatedList from "./components/list/QuestionCreatedList";
+import { SideBar } from "./components/components/SideBar";
 import globalReducer from "./reducers/global";
 import { AllGlobalStyle } from "./styled-components/common";
 

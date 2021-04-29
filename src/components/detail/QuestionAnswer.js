@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 
-import { Input, InputRow, Label, TextArea } from "../styled-components/common";
+import { Input, InputRow, Label, TextArea } from "../../styled-components/common";
 
 const QuestionAnswer = ({ handleQuestionChange, question, handleAnswerChange, answer }) => (
     <Fragment>

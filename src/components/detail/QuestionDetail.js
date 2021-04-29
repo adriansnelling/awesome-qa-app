@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { shallowEqual, useSelector } from "react-redux";
 
-import { createQuestionWithAnswer, updateQuestionWithAnswer, setIsLoading } from "../actions/question";
-import { LoadingSpinner } from "../styled-components/common";
+import { createQuestionWithAnswer, updateQuestionWithAnswer, setIsLoading } from "../../actions/question";
+import { LoadingSpinner } from "../../styled-components/common";
 import QuestionDetailAdd from "./QuestionDetailAdd";
 import QuestionDetailEdit from "./QuestionDetailEdit";
 

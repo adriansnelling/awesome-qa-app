@@ -1,43 +1,45 @@
 import React, { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { Container } from "../styled-components/common";
-import FormButtons from "./components/FormButtons";
+import { cancelQuestionEdit } from "../../actions/question";
+import { Container } from "../../styled-components/common";
+import FormButtons from "../components/FormButtons";
 import QuestionAnswer from "./QuestionAnswer";
-import Tooltip from "./Tooltip";
-import Tools from "../tools/tools";
+import Tooltip from "../components/Tooltip";
+import Tools from "../../tools/tools";
 
 const initialState = {
     answer: "",
+    id: null,
     question: "",
 };
 
-const QuestionDetailAdd = ({ createQuestionWithAnswer, setIsLoading }) => {
+const QuestionDetailEdit = ({ updateQuestionWithAnswer, questionWithAnswer, setIsLoading }) => {
     const dispatch = useDispatch();
-    const [questionWithAnswer, setQuestionWithAnswer] = useState(initialState);
-    const { answer, question } = questionWithAnswer;
+    const [questionWithAnswerEdit, setQuestionWithAnswerEdit] = useState(questionWithAnswer ?? initialState);
+    const { answer, id, question } = questionWithAnswerEdit;
 
     const handleAnswerChange = useCallback(
         (eventChangeAnswer) => {
-            setQuestionWithAnswer({
-                ...questionWithAnswer,
+            setQuestionWithAnswerEdit({
+                ...questionWithAnswerEdit,
                 answer: eventChangeAnswer.target.value,
             });
         },
-        [questionWithAnswer]
+        [questionWithAnswerEdit, setQuestionWithAnswerEdit]
     );
 
     const handleQuestionChange = useCallback(
         (eventChangeQuestion) => {
-            setQuestionWithAnswer({
-                ...questionWithAnswer,
+            setQuestionWithAnswerEdit({
+                ...questionWithAnswerEdit,
                 question: eventChangeQuestion.target.value,
             });
         },
-        [questionWithAnswer]
+        [questionWithAnswerEdit, setQuestionWithAnswerEdit]
     );
 
-    const handleButtonSuccessClick = useCallback(
+    const handleButtonUpdateClick = useCallback(
         async (hasDelay) => {
             if (answer && question) {
                 dispatch(setIsLoading(true));
@@ -46,24 +48,23 @@ const QuestionDetailAdd = ({ createQuestionWithAnswer, setIsLoading }) => {
                     await Tools.waitForDelay();
                 }
 
-                dispatch(createQuestionWithAnswer(answer, question, hasDelay));
+                dispatch(updateQuestionWithAnswer(answer, id, question, hasDelay));
                 dispatch(setIsLoading(false));
-                setQuestionWithAnswer(initialState);
             } else {
                 alert("Please provide a question and answer.");
             }
         },
-        [questionWithAnswer]
+        [questionWithAnswerEdit]
     );
 
     const handleButtonCancelClick = useCallback(() => {
-        setQuestionWithAnswer(initialState);
+        dispatch(cancelQuestionEdit());
     });
 
     return (
         <Container>
-            <Tooltip text="Here you add your new questions and answers.">
-                <h1>New Question</h1>
+            <Tooltip text="Here you can update your question and answer.">
+                <h1>Update Question</h1>
             </Tooltip>
             <QuestionAnswer
                 answer={answer}
@@ -72,13 +73,13 @@ const QuestionDetailAdd = ({ createQuestionWithAnswer, setIsLoading }) => {
                 question={question}
             />
             <FormButtons
-                buttonSuccessFunction={handleButtonSuccessClick}
+                buttonSuccessFunction={handleButtonUpdateClick}
                 handleButtonCancelClick={handleButtonCancelClick}
-                textFail="Clear"
-                textSuccess="Create"
+                textFail="Cancel"
+                textSuccess="Update"
             />
         </Container>
     );
 };
 
-export default QuestionDetailAdd;
+export default QuestionDetailEdit;

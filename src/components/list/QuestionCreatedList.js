@@ -1,11 +1,11 @@
 import React from "react";
 import { shallowEqual, useSelector } from "react-redux";
 import styled from "styled-components";
-import { deleteQuestionList, sortQuestionList } from "../actions/question";
+import { deleteQuestionList, sortQuestionList } from "../../actions/question";
 
-import { Container } from "../styled-components/common";
+import { Container } from "../../styled-components/common";
 import QuestionList from "./QuestionList";
-import Tooltip from "./Tooltip";
+import Tooltip from "../components/Tooltip";
 
 const QuestionHeader = styled.h1`
     text-align: center;

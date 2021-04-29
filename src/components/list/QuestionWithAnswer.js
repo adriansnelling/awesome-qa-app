@@ -1,8 +1,8 @@
 import React, { Fragment, useState } from "react";
 import { useDispatch } from "react-redux";
 import styled, { css } from "styled-components";
-import { deleteQuestionWithAnswerById, editQuestionWithAnswer } from "../actions/question";
-import { ButtonDelete, ButtonSort } from "../styled-components/common";
+import { deleteQuestionWithAnswerById, editQuestionWithAnswer } from "../../actions/question";
+import { ButtonDelete, ButtonSort } from "../../styled-components/common";
 
 const determineContainerBorderRadius = ({ isStart, isEnd }) => {
     if (isStart && isEnd) {

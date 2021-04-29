@@ -1,70 +1,69 @@
 import React, { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { cancelQuestionEdit } from "../actions/question";
-import { Container } from "../styled-components/common";
-import FormButtons from "./components/FormButtons";
+import { Container } from "../../styled-components/common";
+import FormButtons from "../components/FormButtons";
 import QuestionAnswer from "./QuestionAnswer";
-import Tooltip from "./Tooltip";
-import Tools from "../tools/tools";
+import Tooltip from "../components/Tooltip";
+import Tools from "../../tools/tools";
 
 const initialState = {
     answer: "",
-    id: null,
     question: "",
 };
 
-const QuestionDetailEdit = ({ updateQuestionWithAnswer, questionWithAnswer, setIsLoading }) => {
+const QuestionDetailAdd = ({ createQuestionWithAnswer, setIsLoading }) => {
     const dispatch = useDispatch();
-    const [questionWithAnswerEdit, setQuestionWithAnswerEdit] = useState(questionWithAnswer ?? initialState);
-    const { answer, id, question } = questionWithAnswerEdit;
+    const [questionWithAnswer, setQuestionWithAnswer] = useState(initialState);
+    const { answer, question } = questionWithAnswer;
 
     const handleAnswerChange = useCallback(
         (eventChangeAnswer) => {
-            setQuestionWithAnswerEdit({
+            setQuestionWithAnswer({
                 ...questionWithAnswer,
                 answer: eventChangeAnswer.target.value,
             });
         },
-        [questionWithAnswerEdit]
+        [questionWithAnswer]
     );
 
     const handleQuestionChange = useCallback(
         (eventChangeQuestion) => {
-            setQuestionWithAnswerEdit({
+            setQuestionWithAnswer({
                 ...questionWithAnswer,
                 question: eventChangeQuestion.target.value,
             });
         },
-        [questionWithAnswerEdit]
+        [questionWithAnswer]
     );
 
-    const handleButtonUpdateClick = useCallback(
-        (hasDelay) => {
+    const handleButtonSuccessClick = useCallback(
+        async (hasDelay) => {
             if (answer && question) {
                 dispatch(setIsLoading(true));
 
                 if (hasDelay) {
-                    Tools.waitFotDelay();
+                    await Tools.waitForDelay();
                 }
 
-                dispatch(updateQuestionWithAnswer(answer, id, question, hasDelay));
+                dispatch(createQuestionWithAnswer(answer, question, hasDelay));
                 dispatch(setIsLoading(false));
+                setQuestionWithAnswer(initialState);
             } else {
                 alert("Please provide a question and answer.");
             }
         },
-        [questionWithAnswerEdit]
+        [questionWithAnswer]
     );
 
     const handleButtonCancelClick = useCallback(() => {
-        dispatch(cancelQuestionEdit());
+        setQuestionWithAnswer(initialState);
     });
 
     return (
         <Container>
-            <Tooltip text="Here you can update your question and answer.">
-                <h1>Update Question</h1>
+            <Tooltip text="Here you add your new questions and answers.">
+                <h1>New Question</h1>
             </Tooltip>
             <QuestionAnswer
                 answer={answer}
@@ -73,13 +72,13 @@ const QuestionDetailEdit = ({ updateQuestionWithAnswer, questionWithAnswer, setI
                 question={question}
             />
             <FormButtons
-                buttonSuccessFunction={handleButtonUpdateClick}
+                buttonSuccessFunction={handleButtonSuccessClick}
                 handleButtonCancelClick={handleButtonCancelClick}
-                textFail="Cancel"
-                textSuccess="Update"
+                textFail="Clear"
+                textSuccess="Create"
             />
         </Container>
     );
 };
 
-export default QuestionDetailEdit;
+export default QuestionDetailAdd;

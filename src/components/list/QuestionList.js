@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { ButtonDelete, ButtonSort } from "../styled-components/common";
+import { ButtonDelete, ButtonSort } from "../../styled-components/common";
 
 import QuestionWithAnswer from "./QuestionWithAnswer";
 
